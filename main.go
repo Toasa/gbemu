@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-    _ = cpu.Register{}
+    _ = cpu.CPU{}
 
     fmt.Println("OK")
 }

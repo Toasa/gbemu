@@ -1,5 +1,9 @@
 package cpu
 
+type CPU struct {
+    reg *register
+}
+
 type register struct {
     a uint8
     b uint8
