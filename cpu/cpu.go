@@ -4,6 +4,13 @@ type CPU struct {
 	reg *register
 }
 
+func New() *CPU {
+    cpu := &CPU {
+        reg: &register{},
+    }
+    return cpu
+}
+
 type register struct {
 	a uint8
 	b uint8
