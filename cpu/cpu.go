@@ -79,6 +79,22 @@ func (r *register) setCarryFlag() {
     r.f |= 0x10
 }
 
+func (r *register) resetZeroFlag() {
+    r.f &= 0x7F
+}
+
+func (r *register) resetSubFlag() {
+    r.f &= 0xBF
+}
+
+func (r *register) resetHalfCarryFlag() {
+    r.f &= 0xDF
+}
+
+func (r *register) resetCarryFlag() {
+    r.f &= 0xEF
+}
+
 func (r register) getZeroFlag() bool {
     return ((r.f & 0x80) >> 7) == 1
 }
