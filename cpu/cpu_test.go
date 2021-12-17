@@ -5,7 +5,7 @@ import (
 )
 
 func TestGetRegister (t *testing.T) {
-    r := Register {
+    r := register {
         a: 0x11, b: 0x22, c: 0x33, d: 0x44,
         e: 0x55, f: 0x66, h: 0x77, l: 0x88,
     }
@@ -25,7 +25,7 @@ func TestGetRegister (t *testing.T) {
 }
 
 func TestSetRegister (t *testing.T) {
-    r := Register {}
+    r := register {}
 
     r.setAF(0x1166)
     r.setBC(0x2233)
@@ -47,7 +47,7 @@ func TestSetRegister (t *testing.T) {
 }
 
 func TestZeroFlagRegister (t *testing.T) {
-    r := Register {}
+    r := register {}
 
     r.setZeroFlag()
     if r.f != 0x80 {
@@ -59,7 +59,7 @@ func TestZeroFlagRegister (t *testing.T) {
 }
 
 func TestSubFlagRegister (t *testing.T) {
-    r := Register {}
+    r := register {}
 
     r.setSubFlag()
     if r.f != 0x40 {
@@ -71,7 +71,7 @@ func TestSubFlagRegister (t *testing.T) {
 }
 
 func TestHalfCarryFlagRegister (t *testing.T) {
-    r := Register {}
+    r := register {}
 
     r.setHalfCarryFlag()
     if r.f != 0x20 {
@@ -83,7 +83,7 @@ func TestHalfCarryFlagRegister (t *testing.T) {
 }
 
 func TestCarryFlagRegister (t *testing.T) {
-    r := Register {}
+    r := register {}
 
     r.setCarryFlag()
     if r.f != 0x10 {

@@ -1,6 +1,6 @@
 package cpu
 
-type Register struct {
+type register struct {
     a uint8
     b uint8
     c uint8
@@ -23,70 +23,70 @@ type Register struct {
     l uint8
 }
 
-func (r Register) getAF() uint16 {
+func (r register) getAF() uint16 {
     return uint16(r.a) << 8 | uint16(r.f)
 }
 
-func (r Register) getBC() uint16 {
+func (r register) getBC() uint16 {
     return uint16(r.b) << 8 | uint16(r.c)
 }
 
-func (r Register) getDE() uint16 {
+func (r register) getDE() uint16 {
     return uint16(r.d) << 8 | uint16(r.e)
 }
 
-func (r Register) getHL() uint16 {
+func (r register) getHL() uint16 {
     return uint16(r.h) << 8 | uint16(r.l)
 }
 
-func (r *Register) setAF(val uint16) {
+func (r *register) setAF(val uint16) {
     r.a = uint8(0xFF & (val >> 8))
     r.f = uint8(0xFF & val)
 }
 
-func (r *Register) setBC(val uint16) {
+func (r *register) setBC(val uint16) {
     r.b = uint8(0xFF & (val >> 8))
     r.c = uint8(0xFF & val)
 }
 
-func (r *Register) setDE(val uint16) {
+func (r *register) setDE(val uint16) {
     r.d = uint8(0xFF & (val >> 8))
     r.e = uint8(0xFF & val)
 }
 
-func (r *Register) setHL(val uint16) {
+func (r *register) setHL(val uint16) {
     r.h = uint8(0xFF & (val >> 8))
     r.l = uint8(0xFF & val)
 }
 
-func (r *Register) setZeroFlag() {
+func (r *register) setZeroFlag() {
     r.f |= 0x80
 }
 
-func (r *Register) setSubFlag() {
+func (r *register) setSubFlag() {
     r.f |= 0x40
 }
 
-func (r *Register) setHalfCarryFlag() {
+func (r *register) setHalfCarryFlag() {
     r.f |= 0x20
 }
 
-func (r *Register) setCarryFlag() {
+func (r *register) setCarryFlag() {
     r.f |= 0x10
 }
 
-func (r Register) getZeroFlag() bool {
+func (r register) getZeroFlag() bool {
     return ((r.f & 0x80) >> 7) == 1
 }
 
-func (r Register) getSubFlag() bool {
+func (r register) getSubFlag() bool {
     return ((r.f & 0x40) >> 6) == 1
 }
 
-func (r Register) getHalfCarryFlag() bool {
+func (r register) getHalfCarryFlag() bool {
     return ((r.f & 0x20) >> 5) == 1
 }
 
-func (r Register) getCarryFlag() bool {
+func (r register) getCarryFlag() bool {
     return ((r.f & 0x10) >> 4) == 1
 }
