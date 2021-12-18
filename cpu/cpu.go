@@ -7,12 +7,14 @@ import (
 
 type CPU struct {
 	reg *register
+	pc  uint16
 	mem *memory.Memory
 }
 
 func New() *CPU {
 	cpu := &CPU{
 		reg: &register{},
+		pc:  0x100, // On power up, GB's pc is initialized to 0x100.
 		mem: memory.New(),
 	}
 	return cpu
