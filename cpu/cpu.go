@@ -1,16 +1,19 @@
 package cpu
 
 import (
+	"gbemu/memory"
 	"math"
 )
 
 type CPU struct {
 	reg *register
+	mem *memory.Memory
 }
 
 func New() *CPU {
 	cpu := &CPU{
 		reg: &register{},
+		mem: memory.New(),
 	}
 	return cpu
 }
