@@ -5,91 +5,92 @@ import (
 )
 
 func TestGetRegister (t *testing.T) {
-    r := register {
+    cpu := New()
+    cpu.reg = &register {
         a: 0x11, b: 0x22, c: 0x33, d: 0x44,
         e: 0x55, f: 0x66, h: 0x77, l: 0x88,
     }
 
-    if r.getAF() != 0x1166 {
+    if cpu.getAF() != 0x1166 {
         t.Errorf("getAF() failed")
     }
-    if r.getBC() != 0x2233 {
+    if cpu.getBC() != 0x2233 {
         t.Errorf("getBC() failed")
     }
-    if r.getDE() != 0x4455 {
+    if cpu.getDE() != 0x4455 {
         t.Errorf("getDE() failed")
     }
-    if r.getHL() != 0x7788 {
+    if cpu.getHL() != 0x7788 {
         t.Errorf("getHL() failed")
     }
 }
 
 func TestSetRegister (t *testing.T) {
-    r := register {}
+    cpu := New()
 
-    r.setAF(0x1166)
-    r.setBC(0x2233)
-    r.setDE(0x4455)
-    r.setHL(0x7788)
+    cpu.setAF(0x1166)
+    cpu.setBC(0x2233)
+    cpu.setDE(0x4455)
+    cpu.setHL(0x7788)
 
-    if r.a != 0x11 || r.f != 0x66 {
+    if cpu.reg.a != 0x11 || cpu.reg.f != 0x66 {
         t.Errorf("setAF() failed")
     }
-    if r.b != 0x22 || r.c != 0x33 {
+    if cpu.reg.b != 0x22 || cpu.reg.c != 0x33 {
         t.Errorf("setBC() failed")
     }
-    if r.d != 0x44 || r.e != 0x55 {
+    if cpu.reg.d != 0x44 || cpu.reg.e != 0x55 {
         t.Errorf("setDE() failed")
     }
-    if r.h != 0x77 || r.l != 0x88 {
+    if cpu.reg.h != 0x77 || cpu.reg.l != 0x88 {
         t.Errorf("setHL() failed")
     }
 }
 
 func TestZeroFlagRegister (t *testing.T) {
-    r := register {}
+    cpu := New()
 
-    r.setZeroFlag()
-    if r.f != 0x80 {
+    cpu.setZeroFlag()
+    if cpu.reg.f != 0x80 {
         t.Errorf("setZeroFlag() failed")
     }
-    if !r.getZeroFlag() {
+    if !cpu.getZeroFlag() {
         t.Errorf("getZeroFlag() failed")
     }
 }
 
 func TestSubFlagRegister (t *testing.T) {
-    r := register {}
+    cpu := New()
 
-    r.setSubFlag()
-    if r.f != 0x40 {
+    cpu.setSubFlag()
+    if cpu.reg.f != 0x40 {
         t.Errorf("setSubFlag() failed")
     }
-    if !r.getSubFlag() {
+    if !cpu.getSubFlag() {
         t.Errorf("getSubFlag() failed")
     }
 }
 
 func TestHalfCarryFlagRegister (t *testing.T) {
-    r := register {}
+    cpu := New()
 
-    r.setHalfCarryFlag()
-    if r.f != 0x20 {
+    cpu.setHalfCarryFlag()
+    if cpu.reg.f != 0x20 {
         t.Errorf("setHalfCarryFlag() failed")
     }
-    if !r.getHalfCarryFlag() {
+    if !cpu.getHalfCarryFlag() {
         t.Errorf("getHalfCarryFlag() failed")
     }
 }
 
 func TestCarryFlagRegister (t *testing.T) {
-    r := register {}
+    cpu := New()
 
-    r.setCarryFlag()
-    if r.f != 0x10 {
+    cpu.setCarryFlag()
+    if cpu.reg.f != 0x10 {
         t.Errorf("setCarryFlag() failed")
     }
-    if !r.getCarryFlag() {
+    if !cpu.getCarryFlag() {
         t.Errorf("getCarryFlag() failed")
     }
 }

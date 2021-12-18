@@ -34,86 +34,86 @@ type register struct {
 	l uint8
 }
 
-func (r register) getAF() uint16 {
-	return uint16(r.a)<<8 | uint16(r.f)
+func (cpu CPU) getAF() uint16 {
+	return uint16(cpu.reg.a)<<8 | uint16(cpu.reg.f)
 }
 
-func (r register) getBC() uint16 {
-	return uint16(r.b)<<8 | uint16(r.c)
+func (cpu CPU) getBC() uint16 {
+	return uint16(cpu.reg.b)<<8 | uint16(cpu.reg.c)
 }
 
-func (r register) getDE() uint16 {
-	return uint16(r.d)<<8 | uint16(r.e)
+func (cpu CPU) getDE() uint16 {
+	return uint16(cpu.reg.d)<<8 | uint16(cpu.reg.e)
 }
 
-func (r register) getHL() uint16 {
-	return uint16(r.h)<<8 | uint16(r.l)
+func (cpu CPU) getHL() uint16 {
+	return uint16(cpu.reg.h)<<8 | uint16(cpu.reg.l)
 }
 
-func (r *register) setAF(val uint16) {
-	r.a = uint8(0xFF & (val >> 8))
-	r.f = uint8(0xFF & val)
+func (cpu *CPU) setAF(val uint16) {
+	cpu.reg.a = uint8(0xFF & (val >> 8))
+	cpu.reg.f = uint8(0xFF & val)
 }
 
-func (r *register) setBC(val uint16) {
-	r.b = uint8(0xFF & (val >> 8))
-	r.c = uint8(0xFF & val)
+func (cpu *CPU) setBC(val uint16) {
+	cpu.reg.b = uint8(0xFF & (val >> 8))
+	cpu.reg.c = uint8(0xFF & val)
 }
 
-func (r *register) setDE(val uint16) {
-	r.d = uint8(0xFF & (val >> 8))
-	r.e = uint8(0xFF & val)
+func (cpu *CPU) setDE(val uint16) {
+	cpu.reg.d = uint8(0xFF & (val >> 8))
+	cpu.reg.e = uint8(0xFF & val)
 }
 
-func (r *register) setHL(val uint16) {
-	r.h = uint8(0xFF & (val >> 8))
-	r.l = uint8(0xFF & val)
+func (cpu *CPU) setHL(val uint16) {
+	cpu.reg.h = uint8(0xFF & (val >> 8))
+	cpu.reg.l = uint8(0xFF & val)
 }
 
-func (r *register) setZeroFlag() {
-	r.f |= 0x80
+func (cpu *CPU) setZeroFlag() {
+	cpu.reg.f |= 0x80
 }
 
-func (r *register) setSubFlag() {
-	r.f |= 0x40
+func (cpu *CPU) setSubFlag() {
+	cpu.reg.f |= 0x40
 }
 
-func (r *register) setHalfCarryFlag() {
-	r.f |= 0x20
+func (cpu *CPU) setHalfCarryFlag() {
+	cpu.reg.f |= 0x20
 }
 
-func (r *register) setCarryFlag() {
-	r.f |= 0x10
+func (cpu *CPU) setCarryFlag() {
+	cpu.reg.f |= 0x10
 }
 
-func (r *register) resetZeroFlag() {
-	r.f &= 0x7F
+func (cpu *CPU) resetZeroFlag() {
+	cpu.reg.f &= 0x7F
 }
 
-func (r *register) resetSubFlag() {
-	r.f &= 0xBF
+func (cpu *CPU) resetSubFlag() {
+	cpu.reg.f &= 0xBF
 }
 
-func (r *register) resetHalfCarryFlag() {
-	r.f &= 0xDF
+func (cpu *CPU) resetHalfCarryFlag() {
+	cpu.reg.f &= 0xDF
 }
 
-func (r *register) resetCarryFlag() {
-	r.f &= 0xEF
+func (cpu *CPU) resetCarryFlag() {
+	cpu.reg.f &= 0xEF
 }
 
-func (r register) getZeroFlag() bool {
-	return ((r.f & 0x80) >> 7) == 1
+func (cpu CPU) getZeroFlag() bool {
+	return ((cpu.reg.f & 0x80) >> 7) == 1
 }
 
-func (r register) getSubFlag() bool {
-	return ((r.f & 0x40) >> 6) == 1
+func (cpu CPU) getSubFlag() bool {
+	return ((cpu.reg.f & 0x40) >> 6) == 1
 }
 
-func (r register) getHalfCarryFlag() bool {
-	return ((r.f & 0x20) >> 5) == 1
+func (cpu CPU) getHalfCarryFlag() bool {
+	return ((cpu.reg.f & 0x20) >> 5) == 1
 }
 
-func (r register) getCarryFlag() bool {
-	return ((r.f & 0x10) >> 4) == 1
+func (cpu CPU) getCarryFlag() bool {
+	return ((cpu.reg.f & 0x10) >> 4) == 1
 }
