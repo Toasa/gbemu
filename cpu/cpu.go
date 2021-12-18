@@ -1,5 +1,9 @@
 package cpu
 
+import (
+	"math"
+)
+
 type CPU struct {
 	reg *register
 }
@@ -9,6 +13,58 @@ func New() *CPU {
 		reg: &register{},
 	}
 	return cpu
+}
+
+type instType int
+
+const (
+	add instType = iota
+)
+
+type instruction struct {
+	t   instType
+	lhs OperandType
+	rhs OperandType
+}
+
+type OperandType int
+
+const (
+	regA OperandType = iota
+	regB
+	regC
+	regD
+	regE
+	regF
+	regH
+	regL
+)
+
+func (cpu *CPU) add(val uint8) uint8 {
+	newVal, didHalfCarry, didCarry := overflowingAdd(cpu.reg.a, val)
+
+	if newVal == 0 {
+		cpu.setZeroFlag()
+	}
+	cpu.resetSubFlag()
+	if didHalfCarry {
+		cpu.setHalfCarryFlag()
+	}
+	if didCarry {
+		cpu.setCarryFlag()
+	}
+
+	return newVal
+}
+
+func overflowingAdd(x, y uint8) (val uint8, didHalfCarry, didCarry bool) {
+	if x > math.MaxUint8-y {
+		didCarry = true
+	}
+	if ((x & 0xF) + (y & 0xF)) > 0xF {
+		didHalfCarry = true
+	}
+	return x + y, didHalfCarry, didCarry
 }
 
 type register struct {
