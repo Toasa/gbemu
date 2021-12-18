@@ -4,3 +4,5 @@ run:
 test:
 	go test ./cpu
 
+fmt:
+	go fmt ./...
