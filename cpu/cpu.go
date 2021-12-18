@@ -5,10 +5,10 @@ type CPU struct {
 }
 
 func New() *CPU {
-    cpu := &CPU {
-        reg: &register{},
-    }
-    return cpu
+	cpu := &CPU{
+		reg: &register{},
+	}
+	return cpu
 }
 
 type register struct {

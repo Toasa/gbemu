@@ -1,12 +1,12 @@
 package main
 
 import (
-    "fmt"
-    "gbemu/cpu"
+	"fmt"
+	"gbemu/cpu"
 )
 
 func main() {
-    _ = cpu.CPU{}
+	_ = cpu.CPU{}
 
-    fmt.Println("OK")
+	fmt.Println("OK")
 }
